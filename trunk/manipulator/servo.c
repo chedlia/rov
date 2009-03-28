@@ -1,3 +1,4 @@
+//This will eventually control all 8 servos
 #include "16F877A.h"                                  //identify pic
 #device ADC=8    
 #use delay(clock=8000000)                                      //8 bit analog capturevoid main()
