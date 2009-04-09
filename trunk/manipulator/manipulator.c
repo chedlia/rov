@@ -24,26 +24,18 @@ Intended to control the motion of the manipulator arm(s) attached to the ROV.
  and -5 equals 5 units of negative movement. We will also need to decide which way will be positive/negative.
  */	
 
-/*
- Global vars
- */
-#define ON 1
-#define FORWARD 1
-#define OFF 0
-#define CLOSED 0
-#define REVERSE -1
+#include "../ROV.h"
 
-/*
- This struct is used to keep track of the manipulators position.
- */
-struct manip {
+//This struct is used to keep track of the manipulators position.
+
+struct Manip{
 	int joint1 = 0;
 	int joint2 = 0;
 	int joint3 = 0;
 	int joint4 = 0;
 	int joint5 = 0;
 	int gripper = CLOSED;
-}
+};
 
 /*
  MOVEJOINT
@@ -52,22 +44,22 @@ struct manip {
  @param direction; FORWARD, REVERSE
  @param step; how many steps it should make?
  */
-function movejoint(int motor, int direction, int step) {
+void movejoint(int motor, int direction, int step) {
 }
 
 /*
- GRIPPER
+ GRIPSTATE
  controls the gripper's (at the end of the arm) on/off state
  @param state; OFF, ON
  */
-function gripper(int state) {	
+void setGripState(int state) {	
 }
 
 /*
  RESET
  returns the manipulator to the default position.
  */
-function reset(){
+void reset(){
 }
 
 /*
@@ -82,7 +74,7 @@ function reset(){
  @param joint5
  @param gripper
  */
-function track(int joint1, int joint2, int joint3, int joint4, int joint5, int gripper){
+void track(int joint1, int joint2, int joint3, int joint4, int joint5, int gripper){
 }
 
 /*
@@ -90,6 +82,6 @@ function track(int joint1, int joint2, int joint3, int joint4, int joint5, int g
  returns the current state of the manipulator. ie. motor1 is at position 3, motor2 is at position 5, motor3 is at position 1, etc
  @return manip; returns the manip struct
  */
-function state(){
-	return manip;
+Manipulator state(){
+	return Manipulator;
 }
