@@ -1,7 +1,7 @@
 /*   3 Motor PWM Control with 16F877A
 *********************************************/
 
-//So I've made reworked the first part of the code. Breaking the logic up by motor seems like a good
+//So I've reworked the first part of the code. Breaking the logic up by motor seems like a good
 //way to do things, so that's what I did. I don't have the software setup to test this code, so
 //Matt you'll have to test it and see how it works. The sooner you can show up on Friday the better
 //I'd like to get my computer set up with the software needed.
