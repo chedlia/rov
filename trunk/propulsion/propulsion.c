@@ -10,12 +10,7 @@
  Please place your name and time stamp by any contributed note.
  */	
 
-/*
- Global vars
- */
-#define ON 1
-#define FORWARD 1
-#define REVERSE -1
+#include "../ROV.h"
 
 /*
  THRUST
@@ -25,7 +20,7 @@
  @param direction; FORWARD, REVERSE
  @param pwm; puls-width modulation
  */
-function thrust(int motor, int direction, int pwm) {
+void thrust(int motor, int direction, int pwm) {
 	if (motorfeedback(motor)) {
 	//execute		
 	}
