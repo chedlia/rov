@@ -26,15 +26,12 @@ Intended to control the motion of the manipulator arm(s) attached to the ROV.
 
 #include "../header/ROV.h"
 
-//This struct is used to keep track of the manipulators position.
+/*This struct is used to keep track of the manipulators position. */
 
-struct Manip{
-	int joint1 = 0;
-	int joint2 = 0;
-	int joint3 = 0;
-	int joint4 = 0;
-	int joint5 = 0;
-	int gripper = CLOSED;
+struct Manip
+{
+	int joint[5];
+	int gripper;
 };
 
 /*
@@ -44,7 +41,9 @@ struct Manip{
  @param direction; FORWARD, REVERSE
  @param step; how many steps it should make?
  */
-void movejoint(int motor, int direction, int step) {
+void movejoint(int motor, int direction, int step)
+{
+
 }
 
 /*
@@ -52,36 +51,40 @@ void movejoint(int motor, int direction, int step) {
  controls the gripper's (at the end of the arm) on/off state
  @param state; OFF, ON
  */
-void setGripState(int state) {	
+void setGripState(int state)
+{	
+
 }
 
 /*
  RESET
  returns the manipulator to the default position.
  */
-void reset(){
+void reset()
+{
+
 }
 
 /*
- TRACK
+track
  tracks the movement of the manipulator. This function may be called by movement functions in order to keep the current location of the
  manipulator up to date. The input of the parameters are still unclear. They will need to convey the proposed movement of the manipulator.
  We will need to decide on a standard repesentation of movement.
- @param joint1
- @param joint2
- @param joint3
- @param joint4
- @param joint5
+ @param joint[]
  @param gripper
  */
-void track(int joint1, int joint2, int joint3, int joint4, int joint5, int gripper){
+void track(int joint[], int gripper)
+{
+
 }
 
 /*
- STATE
+getState
  returns the current state of the manipulator. ie. motor1 is at position 3, motor2 is at position 5, motor3 is at position 1, etc
  @return manip; returns the manip struct
  */
-Manipulator state(){
-	return Manipulator;
+
+Manip getState()
+{
+	return Manip;
 }
