@@ -10,14 +10,7 @@
  Please place your name and time stamp by any contributed note.
  */	
 
-/*
- Global vars
- */
-#define ON 1
-#define FORWARD 1
-#define OFF 0
-#define CLOSED 0
-#define REVERSE -1
+#include "../ROV.h"
 
 /*
  MOTORFEEDBACK
@@ -26,10 +19,11 @@
  @param motor; 1,2,3, etc
  @return boolean
  */
-function motorfeedback(int motor) {
-	if("everything's ok"){
+bool motorfeedback(int motor) {
+	if("everything's ok")
+	{
 		return true;
-		}
+	}
 	return false;
 }
 
@@ -45,7 +39,7 @@ function motorfeedback(int motor) {
  @param density; the density of the fluid the ROV is traveling through
  @return depth;
  */
-function float depthmeter(float pressure, float gravity, float density) {
+float depthmeter(float pressure, float gravity, float density) {
 	//physics pg451 calculating the depth.
 	float depth = pressure / ( density * gravity);
 	return depth;
