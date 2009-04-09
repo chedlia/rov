@@ -24,7 +24,7 @@ Intended to control the motion of the manipulator arm(s) attached to the ROV.
  and -5 equals 5 units of negative movement. We will also need to decide which way will be positive/negative.
  */	
 
-#include "../ROV.h"
+#include "../header/ROV.h"
 
 //This struct is used to keep track of the manipulators position.
 
