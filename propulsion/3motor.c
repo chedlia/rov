@@ -26,12 +26,10 @@ struct Motor
 	int ADCNum;
 	int direction;
 };
-
-
 void readPot(Motor motor)
 {
 	set_adc_channel(motor.ADCNum);		/* start ADC capture on pin*/
-	motor.potValue = read_adc();
+	motor->potValue = read_adc();
 }
 
 void setDirection(Motor motor)
@@ -70,12 +68,11 @@ void main()
 
 	setup_adc(ADC_CLOCK_INTERNAL);						/*  Setup ADC input*/
 	setup_adc_ports(ALL_ANALOG);
-
    while(1)												/*  loop forever*/
    {
 		readPot(one;)
 		setDirection(one);
-
+		/* we may need the pauses in here again, but we'll see*/
 		readPot(two);
 		setDirection(two);
 
@@ -83,7 +80,7 @@ void main()
 		setDirection(three);
 
 		/*I'm not really sure what we're doing with this for-loop, so for now it's just modified
-		//to work with the code changes I made, however I believe it can be optimized a great deal*/
+		to work with the code changes I made, however I believe it can be optimized a great deal*/
 
 		for(step=0;step<254;step++)                     /*   For loop where on states occur*/
 		 {
