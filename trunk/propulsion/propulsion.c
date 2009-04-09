@@ -22,6 +22,6 @@
  */
 void thrust(int motor, int direction, int pwm) {
 	if (motorfeedback(motor)) {
-	//execute		
+	/*execute	 */	
 	}
 }
