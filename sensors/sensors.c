@@ -40,7 +40,7 @@ bool motorfeedback(int motor) {
  @return depth;
  */
 float depthmeter(float pressure, float gravity, float density) {
-	//physics pg451 calculating the depth.
+	/*physics pg451 calculating the depth.*/
 	float depth = pressure / ( density * gravity);
 	return depth;
 }
