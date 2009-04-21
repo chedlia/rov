@@ -92,35 +92,28 @@ void main()
       readPot(three);
       setDirection(three);
 
-      /*I'm not really sure what we're doing with this for-loop, so for now it's just modified
-      to work with the code changes I made, however I believe it can be optimized a great deal
-      
-      Currently this for loop (not counting execution time for any of the functions) takes
-      about 50 seconds to run!!! Because of the "Critical Delay" at the end. That means we could
-      only update our speed/direction once a minute!
-      */
 
-      for(step=0;step<254;step++)                     /*   For loop where on states occur*/
-       {
-         if (one.reverseValue<step) output_high(PIN_B0);   /* pin b0 on to motor one (reverse)*/
-         else output_low(PIN_B0);                  /* pin B0 off */
-
-         if (one.forwardValue>step) output_high (pin_b1);  /*pin B1 to motor one (forward)*/
-         else output_low(pin_b1);                 /* pin B1 off*/
-          
-         if (two.reverseValue<step) output_high(PIN_B2);   /* pin B2 to motor two (reverse)*/
-         else output_low(PIN_B2);                  /* pin B2 off*/
-          
-         if (two.forwardValue>step) output_high (pin_b3);  /* pin B3 to motor two (forward)*/
-         else output_low(pin_b3);                  /* pin B3 off*/
-
-         if (three.reverseValue<step) output_high(PIN_B4);   /* pin B4 on to motor three (reverse)*/
-         else output_low(PIN_B4);                  /* pin B4 off  */
-          
-         if (three.forwardValue>step) output_high (pin_b5);  /* pin B5 on to motor three (forward)*/
-         else output_low(pin_b5);                  /* pin B5 off*/
-
-         delay_us(200);                            /* Critical delay to help set duty cycle...needs testing*/
-       }
+		for(step=0;step<254;step++)                     /*   For loop where on states occur*/
+		 {
+			if (one.reverseValue<step) output_high(PIN_B0);   /* pin b0 on to motor one (reverse)*/
+			else output_low(PIN_B0);                  /* pin B0 off */
+		    
+			if (one.forwardVale>step) output_high (pin_b1);  /*pin B1 to motor one (forward)*/
+			else output_low(pin_b1);                 /* pin B1 off*/
+		    
+			if (two.reverseValue<step) output_high(PIN_B2);   /* pin B2 to motor two (reverse)*/
+			else output_low(PIN_B2);                  /* pin B2 off*/
+		    
+			if (two.forwardValue>step) output_high (pin_b3);  /* pin B3 to motor two (forward)*/
+			else output_low(pin_b3);                  /* pin B3 off*/
+		    
+			if (three.reverseValue<step) output_high(PIN_B4);   /* pin B4 on to motor three (reverse)*/
+			else output_low(PIN_B4);                  /* pin B4 off  */
+		    
+			if (three.forwardValue>step) output_high (pin_b5);  /* pin B5 on to motor three (forward)*/
+			else output_low(pin_b5);                  /* pin B5 off*/
+		    
+			delay_us(200);                            /*MicroSeconds Critical delay to help set duty cycle...needs testing*/
+		 }
    }
 }
