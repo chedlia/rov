@@ -13,9 +13,9 @@ If we can find a way to pass the motor struct by reference we may be able to sol
 #include "16F877A.h"      /*identify pic*/
 #define MINFORWARD 130         /*This is the lowest the value can be, and still be in FORWARD motion*/
 #define MAXREVERSE 120         /*This is the highest the value can be, and still be in REVERSE motion*/
-//#define REVERSE 255
-//#define FORWARD 0
-//#define STOP 125
+#define REVERSE -1
+#define FORWARD 1
+#define STOP 0
 
 #device ADC=8      /*8 bit analog capture*/
 
@@ -28,7 +28,7 @@ typedef struct Motor                  /* we need to make a type definition in or
    int reverseValue;
    int potValue;
    int ADCNum;
-  // int direction; //we don't use this
+   int direction; /*we don't use this*/
 } Motor;                              /*typedef name*/
 
 void readPot(Motor *motor)
@@ -44,22 +44,21 @@ void setDirection(Motor *motor)
    {
       motor->reverseValue = motor->potValue; // I don't think the motor.potValue
       motor->forwardValue = 0;
-     // motor->direction = REVERSE;
+      motor->direction = REVERSE;
    }
    else if (motor->potValue > MINFORWARD)
    {
       motor->reverseValue = 0;
       motor->forwardValue = motor->potValue;
-     // motor->direction = FORWARD;
+      motor->direction = FORWARD;
    }
    else
    {
       motor->reverseValue = 0;
       motor->forwardValue = 0;
-     // motor->direction = STOP;
+      motor->direction = STOP;
    }
 }
-
 
 
 void main()
@@ -94,26 +93,27 @@ void main()
 
 
 		for(step=0;step<254;step++)                     /*   For loop where on states occur*/
-		 {
-			if (one.reverseValue<step) output_high(PIN_B0);   /* pin b0 on to motor one (reverse)*/
-			else output_low(PIN_B0);                  /* pin B0 off */
-		    
-			if (one.forwardVale>step) output_high (pin_b1);  /*pin B1 to motor one (forward)*/
-			else output_low(pin_b1);                 /* pin B1 off*/
-		    
-			if (two.reverseValue<step) output_high(PIN_B2);   /* pin B2 to motor two (reverse)*/
-			else output_low(PIN_B2);                  /* pin B2 off*/
-		    
-			if (two.forwardValue>step) output_high (pin_b3);  /* pin B3 to motor two (forward)*/
-			else output_low(pin_b3);                  /* pin B3 off*/
-		    
-			if (three.reverseValue<step) output_high(PIN_B4);   /* pin B4 on to motor three (reverse)*/
-			else output_low(PIN_B4);                  /* pin B4 off  */
-		    
-			if (three.forwardValue>step) output_high (pin_b5);  /* pin B5 on to motor three (forward)*/
-			else output_low(pin_b5);                  /* pin B5 off*/
-		    
-			delay_us(200);                            /*MicroSeconds Critical delay to help set duty cycle...needs testing*/
-		 }
-   }
+			{
+
+				if (one.reverseValue<step) output_high(PIN_B0);   /* pin b0 on to motor one (reverse)*/
+				else output_low(PIN_B0);                  /* pin B0 off */
+
+				if (one.forwardValue>step) output_high (pin_b1);  /*pin B1 to motor one (forward)*/
+				else output_low(pin_b1);                 /* pin B1 off*/
+
+				if (two.reverseValue<step) output_high(PIN_B2);   /* pin B2 to motor two (reverse)*/
+				else output_low(PIN_B2);                  /* pin B2 off*/
+
+				if (two.forwardValue>step) output_high (pin_b3);  /* pin B3 to motor two (forward)*/
+				else output_low(pin_b3);                  /* pin B3 off*/
+
+				if (three.reverseValue<step) output_high(PIN_B4);   /* pin B4 on to motor three (reverse)*/
+				else output_low(PIN_B4);                  /* pin B4 off  */
+
+				if (three.forwardValue>step) output_high (pin_b5);  /* pin B5 on to motor three (forward)*/
+				else output_low(pin_b5);                  /* pin B5 off*/
+
+				delay_us(2);                            /*MicroSeconds Critical delay to help set duty cycle...needs testing*/
+			}
+		}
 }
