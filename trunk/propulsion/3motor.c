@@ -31,32 +31,32 @@ typedef struct Motor                  /* we need to make a type definition in or
   // int direction; //we don't use this
 } Motor;                              /*typedef name*/
 
-void readPot(Motor motor)
+void readPot(Motor *motor)
 {
-   set_adc_channel(motor.ADCNum);      /* start ADC capture on pin*/
-   motor.potValue = read_adc();         /*changed from -> to .*/
+   set_adc_channel(motor->ADCNum);      /* start ADC capture on pin*/
+   motor->potValue = read_adc();         /*changed from -> to .*/
   // delay_ms(10);
 }
 
-void setDirection(Motor motor)
+void setDirection(Motor *motor)
 {
-   if (motor.potValue < MAXREVERSE)
+   if (motor->potValue < MAXREVERSE)
    {
-      motor.reverseValue = motor.potValue; // I don't think the motor.potValue
-      motor.forwardValue = 0;
-     // motor.direction = REVERSE;
+      motor->reverseValue = motor->potValue; // I don't think the motor.potValue
+      motor->forwardValue = 0;
+     // motor->direction = REVERSE;
    }
-   else if (motor.potValue > MINFORWARD)
+   else if (motor->potValue > MINFORWARD)
    {
-      motor.reverseValue = 0;
-      motor.forwardValue = motor.potValue;
-     // motor.direction = FORWARD;
+      motor->reverseValue = 0;
+      motor->forwardValue = motor->potValue;
+     // motor->direction = FORWARD;
    }
    else
    {
-      motor.reverseValue = 0;
-      motor.forwardValue = 0;
-     // motor.direction = STOP;
+      motor->reverseValue = 0;
+      motor->forwardValue = 0;
+     // motor->direction = STOP;
    }
 }
 
@@ -82,15 +82,15 @@ void main()
 
    while(1)                                    /*  loop forever*/
    {
-      readPot(one);
-      setDirection(one);
+      readPot(&one);
+      setDirection(&one);
       /* we may need the pauses in here again, but we'll see*/
 
-      readPot(two);
-      setDirection(two);
+      readPot(&two);
+      setDirection(&two);
 
-      readPot(three);
-      setDirection(three);
+      readPot(&three);
+      setDirection(&three);
 
 
 		for(step=0;step<254;step++)                     /*   For loop where on states occur*/
