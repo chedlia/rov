@@ -1,5 +1,6 @@
-/*   propulsion.c
-	 3 Motor PWM Control with 16F877A   
+/*  propulsion.c
+	3 Motor PWM Control with PIC 16F877A   
+	and L298HN Bridge Driver
 *********************************************/
 
 #include "16F877A.h"                                  /* identify pic */
