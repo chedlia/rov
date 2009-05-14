@@ -1,6 +1,6 @@
 /*   propulsion.c
-    3 Motor PWM Control with 16F877A   
-*********************************************/
+ *   3 Motor PWM Control with 16F877A   
+ ********************************************/
 
 #include "16F877A.h"                                     			/* identify pic */
 #device ADC=8                                            			/* 8 bit analog capture*/
