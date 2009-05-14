@@ -22,7 +22,7 @@ void main()
    setup_adc(ADC_CLOCK_INTERNAL);                        			/*  Setup ADC input*/
    setup_adc_ports(ALL_ANALOG);
 
-   while(true)                                              		/* infinite loop */
+   while(true)														/* infinite loop */
    {
       work = 0;                                            			/* reset the work variable */
       for(channel = 0; channel <= 2; channel++){          			/* loop through the input channels */
