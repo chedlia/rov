@@ -41,7 +41,7 @@ void main()
 
       work += 42;                                          			/*  all motor pins on*/
 
-      for(step = 0; step < 100; step++){                        	/*  For loop where on states occur*/
+      for(step = 0; step < 100; step++){							/*  For loop where on states occur*/
 	  	  if (speed[0] == step) 
              work -= 2;                                				/* pin B0 off */
           if (speed[1] == step) 
