@@ -12,31 +12,35 @@ Programed by Matt Seidlitz
 #use delay(clock=4000000)                                /* chip set at 4Mhz*/
 #include "math.h" 
 #use rs232 (baud=9600,uart1)
+#int_RDA
+   unsigned int vin[3];  
+void interrupt()
+   {int motor;
+    motor=getc();
+     vin[motor]=getc();  }
+     
 void main()
 {
 
-   unsigned int vin[3];                                  /* vin [0,1,2] varibles the potentiometer values are stored into */
+  // unsigned int vin[3];                                  /* vin [0,1,2] varibles the potentiometer values are stored into */
    unsigned int channel;                               /* variable for voltage in loop */
+  // unsigned int motor;
    unsigned int speed[3];                                /* variable to set the speed of motor 1,2,3 */ 
    unsigned int work;                                    /* binary output on bank B variable */
    int step;                                             /* The step variable is used to count through the duty cycle */
-   unsigned int16 data;
    
    setup_adc(ADC_CLOCK_INTERNAL);                        /*  Setup ADC input*/
    setup_adc_ports(ALL_ANALOG);
+   enable_interrupts(int_rda);
+   enable_interrupts(global);
+   ext_int_edge(H_TO_L);
+   
 
    for(;;)                                               /* infinet loop */
+   {      
+    work=0;                                            /* reset the work variable */
+    for(channel = 0; channel <=2; channel++)             /* loop through the input channels */
    {
-      work=0;                                            /* reset the work variable */
-      for(channel = 0; channel <=2; channel++){          /* loop through the input channels */
-         data=getc();
-         if (data < 1000)
-            vin[0]=data;
-         if (data < 2000 && data >999)
-            vin[1]=data-1000;
-         else 
-            vin[2]=data-2000;
-         
          If (vin[channel] < 120)                         /* reverse position*/
             speed[channel]=vin[channel]*-.5+80;          /* calculate the time on based on the input.  returns a value from 80-20 */
          else If (vin[channel] > 135){                   /* forward position*/
