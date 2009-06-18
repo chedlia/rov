@@ -22,7 +22,7 @@ unsigned int bin[7];                           /* array used to determin active 
 
 /*function declarations*/
 void servo (void);
-void dec_bin(int number, int index);
+void dec_bin(unsigned int number);
       
 /*main */
 void main()
@@ -228,7 +228,7 @@ http://www.c.happycodings.com/Miscellaneous/code9.html
 
 note this will load everything backwards. We can change this later.
 */
-void dec_bin(int number) 
+void dec_bin(unsigned int number) 
 {
 	int x = 0;
 	int y = 0;
