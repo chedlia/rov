@@ -18,7 +18,7 @@ unsigned int direction;
 unsigned int position[7];
 int step;                                              /* The step variable is used to count through the duty cycle */
 unsigned int servo_pos=0;
-unsigned int bin[8];                           /* array used to determin active motors*/
+unsigned int bin[7];                           /* array used to determin active motors*/
 
 /*function declarations*/
 void servo (void);
@@ -136,8 +136,10 @@ void main()
 
       /* build binary index*/
       dec_bin(movement);
+	
+	/* note: we appear to test the values in bin[] backwards. we can fix this later.*/
       
-         if(bin[0]==1){                                /* test if active*/
+         if(bin[6]==1){                                /* test if active*/
                if (position[0] == location[0])               /* if the position is in the correct location turn of that pin */
                  movement -= 1;                                     
                else if (position[0]>location[0])             /* if the position is beyond the location go down one step*/
@@ -146,7 +148,7 @@ void main()
                   position[channel] -= 1;
           }
 
-         if(bin[1]==1){                                /* test if active*/
+         if(bin[5]==1){                                /* test if active*/
                if (position[1] == location[1])               /* if the position is in the correct location turn of that pin */
                  movement -= 2;                                     
                else if (position[1]>location[1])             /* if the position is beyond the location go down one step*/
@@ -155,7 +157,7 @@ void main()
                   position[channel] -= 1;       
        }           
                   
-         if(bin[2]==1){                                /* test if active*/
+         if(bin[4]==1){                                /* test if active*/
                if (position[2] == location[2])               /* if the position is in the correct location turn of that pin */
                  movement -= 4;                                     
                else if (position[2]>location[2])             /* if the position is beyond the location go down one step*/
@@ -173,7 +175,7 @@ void main()
                   position[channel] -= 1;      
        }            
 
-         if(bin[4]==1){                                /* test if active*/
+         if(bin[2]==1){                                /* test if active*/
                if (position[4] == location[4])               /* if the position is in the correct location turn of that pin */
                  movement -= 16;                                     
                else if (position[4]>location[4])             /* if the position is beyond the location go down one step*/
@@ -182,7 +184,7 @@ void main()
                   position[channel] -= 1;
        }
 
-         if(bin[5]==1){                                /* test if active*/
+         if(bin[1]==1){                                /* test if active*/
                if (position[5] == location[5])               /* if the position is in the correct location turn of that pin */
                  movement -= 32;                                     
                else if (position[5]>location[5])             /* if the position is beyond the location go down one step*/
@@ -191,7 +193,7 @@ void main()
                   position[channel] -= 1;
        }
 
-         if(bin[6]==1){                                /* test if active*/
+         if(bin[0]==1){                                /* test if active*/
                if (position[6] == location[6])               /* if the position is in the correct location turn of that pin */
                  movement -= 64;                                     
                else if (position[6]>location[6])             /* if the position is beyond the location go down one step*/
@@ -223,13 +225,15 @@ void servo(void)
 
 /* source
 http://www.c.happycodings.com/Miscellaneous/code9.html
+
+note this will load everything backwards. We can change this later.
 */
 void dec_bin(int number) 
 {
 	int x = 0;
 	int y = 0;
    
-   for(y = 0; y <= 7; y++) {
+   for(y = 7; y >= 7; y--) {
       bin[y] = number / (1 << y);
       number -= bin[y] * (1 << y);
    }
