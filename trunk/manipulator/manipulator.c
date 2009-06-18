@@ -18,12 +18,12 @@ unsigned int direction;
 unsigned int position[7];
 int step;                                              /* The step variable is used to count through the duty cycle */
 unsigned int servo_pos=0;
-unsigned int bin[8];								   /* array used to determin active motors*/
+unsigned int bin[8];                           /* array used to determin active motors*/
 
 /*function declarations*/
 void servo (void);
 void dec_bin(int number, int index);
-	   
+      
 /*main */
 void main()
 {
@@ -33,9 +33,9 @@ void main()
    /* infinite loop */
    while(true)                                            
    {
-      direction = 0;										/* resent direction */
+      direction = 0;                              /* resent direction */
       movement = 127;                                       /* reset  movement */
-	  
+     
       for (channel =0;channel<8;channel++) {
          set_adc_channel(channel);                        /* setup channel based on loop */
          delay_us(20);
@@ -43,7 +43,7 @@ void main()
          delay_us(10);                                    /* small delay to give the pic time to read the input value */
          //vin[channel]*multiplyer to set position?
       }
-	  /* Stepper motor 1*/
+     /* Stepper motor 1*/
       if (vin[0] == position[0])           /* if the position is equal the the input then stay there*/
          location[0] = vin[0];
             
@@ -55,7 +55,7 @@ void main()
          direction += 1;
       }
 
-	  /* Stepper motor 2*/
+     /* Stepper motor 2*/
       if (vin[2] == position[1])           /* if the position is equal the the input then stay there*/
          location[1] = vin[1];
             
@@ -65,9 +65,9 @@ void main()
       else if (vin[1] < position[1])  {    /* if the input is less than the position then turn on reverse and go to that position*/
          location[1] = position[1] - vin[1];
          direction += 2;
-	  }
+     }
 
-	  /* Stepper motor 3*/
+     /* Stepper motor 3*/
       if (vin[2] == position[2])           /* if the position is equal the the input then stay there*/
          location[2] = vin[2];
             
@@ -77,9 +77,9 @@ void main()
       else if (vin[2] < position[2])  {    /* if the input is less than the position then turn on reverse and go to that position*/
          location[2] = position[2] - vin[2];
          direction += 4;
-	  }
+     }
 
-	  /* Stepper motor 4*/
+     /* Stepper motor 4*/
       if (vin[3] == position[3])           /* if the position is equal the the input then stay there*/
          location[3] = vin[3];
             
@@ -89,9 +89,9 @@ void main()
       else if (vin[3] < position[3])  {    /* if the input is less than the position then turn on reverse and go to that position*/
          location[3] = position[3] - vin[3];
          direction += 8;
-	  }
+     }
 
-	  /* Stepper motor 5*/
+     /* Stepper motor 5*/
       if (vin[4] == position[4])           /* if the position is equal the the input then stay there*/
          location[4] = vin[4];
             
@@ -101,9 +101,9 @@ void main()
       else if (vin[4] < position[4])  {    /* if the input is less than the position then turn on reverse and go to that position*/
          location[4] = position[4] - vin[4];
          direction += 16;
-	  }
+     }
 
-	  /* Stepper motor 6*/
+     /* Stepper motor 6*/
       if (vin[5] == position[5])           /* if the position is equal the the input then stay there*/
          location[5] = vin[5];
             
@@ -113,9 +113,9 @@ void main()
       else if (vin[5] < position[5])  {    /* if the input is less than the position then turn on reverse and go to that position*/
          location[5] = position[5] - vin[5];
          direction += 32;
-	  }
+     }
 
-	  /* Stepper motor 7*/
+     /* Stepper motor 7*/
       if (vin[6] == position[6])           /* if the position is equal the the input then stay there*/
          location[6] = vin[6];
             
@@ -125,19 +125,19 @@ void main()
       else if (vin[6] < position[6])  {    /* if the input is less than the position then turn on reverse and go to that position*/
          location[6] = position[6] - vin[channel];
          direction += 64;
-	  }
+     }
 
-	  /* Fetch servo code*/
+     /* Fetch servo code*/
       If (vin[7] != servo_pos)
          servo();
       }
 
       for(step = 0; step < 100; step++){                     /*  For loop where on states occur*/   
 
-		/* build binary index*/
-		dec_bin(movement);
-		
-	  	 if(bin[0]==1){							 			 /* test if active*/
+      /* build binary index*/
+      dec_bin(movement);
+      
+         if(bin[0]==1){                                /* test if active*/
                if (position[0] == location[0])               /* if the position is in the correct location turn of that pin */
                  movement -= 1;                                     
                else if (position[0]>location[0])             /* if the position is beyond the location go down one step*/
@@ -146,59 +146,59 @@ void main()
                   position[channel] -= 1;
           }
 
-	  	 if(bin[1]==1){							 			 /* test if active*/
+         if(bin[1]==1){                                /* test if active*/
                if (position[1] == location[1])               /* if the position is in the correct location turn of that pin */
                  movement -= 2;                                     
                else if (position[1]>location[1])             /* if the position is beyond the location go down one step*/
                   position[channel] += 1;                  
                else if (position[1]<location[1])             /* if the position is before the location move one step*/
                   position[channel] -= 1;       
-		 }           
+       }           
                   
-	  	 if(bin[2]==1){							 			 /* test if active*/
+         if(bin[2]==1){                                /* test if active*/
                if (position[2] == location[2])               /* if the position is in the correct location turn of that pin */
                  movement -= 4;                                     
                else if (position[2]>location[2])             /* if the position is beyond the location go down one step*/
                   position[channel] += 1;                  
                else if (position[2]<location[2])             /* if the position is before the location move one step*/
                   position[channel] -= 1;      
-		 }            
+       }            
                   
-	  	 if(bin[3]==1){							 			 /* test if active*/
+         if(bin[3]==1){                                /* test if active*/
                if (position[3] == location[3])               /* if the position is in the correct location turn of that pin */
                  movement -= 8;                                     
                else if (position[3]>location[3])             /* if the position is beyond the location go down one step*/
                   position[channel] += 1;                  
                else if (position[3]<location[3])             /* if the position is before the location move one step*/
                   position[channel] -= 1;      
-		 }            
+       }            
 
-	  	 if(bin[4]==1){							 			 /* test if active*/
+         if(bin[4]==1){                                /* test if active*/
                if (position[4] == location[4])               /* if the position is in the correct location turn of that pin */
                  movement -= 16;                                     
                else if (position[4]>location[4])             /* if the position is beyond the location go down one step*/
                   position[channel] += 1;                  
                else if (position[4]<location[4])             /* if the position is before the location move one step*/
                   position[channel] -= 1;
-		 }
+       }
 
-	  	 if(bin[5]==1){							 			 /* test if active*/
+         if(bin[5]==1){                                /* test if active*/
                if (position[5] == location[5])               /* if the position is in the correct location turn of that pin */
                  movement -= 32;                                     
                else if (position[5]>location[5])             /* if the position is beyond the location go down one step*/
                   position[channel] += 1;                  
                else if (position[5]<location[5])             /* if the position is before the location move one step*/
                   position[channel] -= 1;
-		 }
+       }
 
-	  	 if(bin[6]==1){							 			 /* test if active*/
+         if(bin[6]==1){                                /* test if active*/
                if (position[6] == location[6])               /* if the position is in the correct location turn of that pin */
                  movement -= 64;                                     
                else if (position[6]>location[6])             /* if the position is beyond the location go down one step*/
                   position[channel] += 1;                  
                else if (position[6]<location[6])             /* if the position is before the location move one step*/
                   position[channel] -= 1;
-		 }
+       }
                   
             output_B(direction);                            /* turn on outputs on Bank B based on binary */
             output_D(movement);                             /* turn on outputs on bank D based on binary */
@@ -207,7 +207,7 @@ void main()
             delay_ms (2);                                   /* needs tweeking should equal previous delay with time spent on statements above*/
          }
 
-       
+}
             
 void servo(void)
 {
@@ -226,11 +226,11 @@ http://www.c.happycodings.com/Miscellaneous/code9.html
 */
 void dec_bin(int number) 
 {
-	int x, y;
-	x = y = 0;
-	
-	for(y = 0; y >= 7; y++) {
-		bin[y] = number / (1 << y);
-		number -= bin[y] * (1 << y);
-	}
+	int x = 0;
+	int y = 0;
+   
+   for(y = 0; y <= 7; y++) {
+      bin[y] = number / (1 << y);
+      number -= bin[y] * (1 << y);
+   }
 }
