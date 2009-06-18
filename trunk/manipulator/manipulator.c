@@ -230,7 +230,6 @@ note this will load everything backwards. We can change this later.
 */
 void dec_bin(unsigned int number) 
 {
-	int x = 0;
 	int y = 0;
    
    for(y = 7; y >= 7; y--) {
